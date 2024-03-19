@@ -1,4 +1,6 @@
 package jeu;
+import org.json.JSONException;
+
 import java.util.Scanner;
 
 public class InterfaceUtilisateur {
@@ -8,7 +10,7 @@ public class InterfaceUtilisateur {
         this.gestionCompte = new GestionCompte();
     }
 
-    public void demarrerJeu() {
+    public void demarrerJeu() throws JSONException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bienvenue au jeu !");
 

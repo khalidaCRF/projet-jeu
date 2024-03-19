@@ -1,11 +1,13 @@
 package jeu;
+
+import org.json.JSONException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
 
-public class GUI implements ActionListener
-{
+public class GUI implements ActionListener {
     private Jeu jeu;
     private JFrame fenetre;
     private JTextField entree;
@@ -16,11 +18,13 @@ public class GUI implements ActionListener
     private JButton sudButton;
     private JButton estButton;
     private JButton ouestButton;
+    private JTextField nomUtilisateurField;
+    private JPasswordField motDePasseField;
 
     public GUI(Jeu j) {
         jeu = j;
         creerGUI();
-        afficherInterface();
+        afficherInterfaceConnexion();
     }
 
     public void afficher(String s) {
@@ -32,17 +36,17 @@ public class GUI implements ActionListener
         afficher("\n");
     }
 
-    public void afficheImage( String nomImage) {
+    public void afficheImage(String nomImage) {
         URL imageURL = this.getClass().getClassLoader().getResource("jeu/images/" + nomImage);
-        if( imageURL != null ) {
-            image.setIcon( new ImageIcon( imageURL ));
+        if (imageURL != null) {
+            image.setIcon(new ImageIcon(imageURL));
             fenetre.pack();
         }
     }
 
     public void enable(boolean ok) {
         entree.setEditable(ok);
-        if ( ! ok )
+        if (!ok)
             entree.getCaret().setBlinkRate(0);
     }
 
@@ -55,7 +59,7 @@ public class GUI implements ActionListener
         texte.setEditable(false);
         JScrollPane listScroller = new JScrollPane(texte);
         listScroller.setPreferredSize(new Dimension(200, 200));
-        listScroller.setMinimumSize(new Dimension(100,100));
+        listScroller.setMinimumSize(new Dimension(100, 100));
 
         JPanel panel = new JPanel();
         image = new JLabel();
@@ -83,17 +87,18 @@ public class GUI implements ActionListener
     private void executerCommande() {
         String commandeLue = entree.getText();
         entree.setText("");
-        jeu.traiterCommande( commandeLue);
+        jeu.traiterCommande(commandeLue);
     }
+
     public void afficherInterfaceConnexion() {
         // Affichage de l'interface graphique pour la connexion
-        JFrame frame = new JFrame("Connexion au jeu");
-        frame.setSize(400, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fenetre = new JFrame("Connexion au jeu");
+        fenetre.setSize(400, 200);
+        fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
-        frame.add(panel);
+        fenetre.add(panel);
         placeComponents(panel);
-        frame.setVisible(true);
+        fenetre.setVisible(true);
     }
 
     private void placeComponents(JPanel panel) {
@@ -103,17 +108,17 @@ public class GUI implements ActionListener
         userLabel.setBounds(10, 20, 120, 25);
         panel.add(userLabel);
 
-        JTextField userText = new JTextField(20);
-        userText.setBounds(140, 20, 165, 25);
-        panel.add(userText);
+        nomUtilisateurField = new JTextField(20);
+        nomUtilisateurField.setBounds(140, 20, 165, 25);
+        panel.add(nomUtilisateurField);
 
         JLabel passwordLabel = new JLabel("Mot de passe:");
         passwordLabel.setBounds(10, 50, 120, 25);
         panel.add(passwordLabel);
 
-        JPasswordField passwordText = new JPasswordField(20);
-        passwordText.setBounds(140, 50, 165, 25);
-        panel.add(passwordText);
+        motDePasseField = new JPasswordField(20);
+        motDePasseField.setBounds(140, 50, 165, 25);
+        panel.add(motDePasseField);
 
         JButton loginButton = new JButton("Se connecter");
         loginButton.setBounds(10, 80, 120, 25);
@@ -123,14 +128,37 @@ public class GUI implements ActionListener
         createAccountButton.setBounds(140, 80, 165, 25);
         panel.add(createAccountButton);
 
+        // Action à effectuer lorsque l'utilisateur appuie sur le bouton de connexion
+        loginButton.addActionListener(e -> {
+            String username = nomUtilisateurField.getText();
+            String password = new String(motDePasseField.getPassword());
+            // Vérifier les identifiants de connexion
+            try {
+                if (gestionCompte.verifierConnexion(username, password)) {
+                    fenetre.dispose(); // Fermer la fenêtre de connexion
+                    // Afficher l'interface principale du jeu
+                    afficherInterface();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Nom d'utilisateur ou mot de passe incorrect.");
+                }
+            } catch (JSONException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
         // Action à effectuer lorsque l'utilisateur appuie sur le bouton de création de compte
         createAccountButton.addActionListener(e -> {
-            String username = userText.getText();
-            String password = new String(passwordText.getPassword());
+            String username = nomUtilisateurField.getText();
+            String password = new String(motDePasseField.getPassword());
             // Appeler la méthode de création de compte de GestionCompte
-            gestionCompte.creerCompte(username, password);
+            try {
+                gestionCompte.creerCompte(username, password);
+            } catch (JSONException ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
+
     private void afficherInterface() {
         JFrame frame = new JFrame("Jeu d'aventure");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -193,5 +221,4 @@ public class GUI implements ActionListener
         estButton.setText(est ? "\u2192" : ""); // Flèche vers l'est si possible, sinon vide
         ouestButton.setText(ouest ? "\u2190" : ""); // Flèche vers l'ouest si possible, sinon vide
     }
-
 }
