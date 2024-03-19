@@ -1,0 +1,44 @@
+[
+
+    {
+      "question": "Trouver un nombre entier dont le carré moins 10 égale à 21",
+      "solution": "5"
+    },
+    {
+      "question": "Convertir le nombre hexadécimal A3 en décimal",
+      "solution": "163"
+    },
+    {
+      "question": "Quelle est la septième planète à partir du soleil dans notre système solaire ?",
+      "solution": "Uranus"
+    },
+    {
+      "question": "Combien de façons différentes peut-on organiser les lettres du mot \"INFORMATIQUE\" ?",
+      "solution": "12!/2"
+    },
+    {
+      "question": "Vous êtes au centre d'un labyrinthe cubique. Si vous faites un pas en avant, un pas à droite, un pas en arrière, un pas à gauche, un pas vers le haut, et enfin un pas vers le bas, dans quelle direction êtes-vous maintenant ?",
+      "solution": "Au centre du labyrinthe où vous avez commencé"
+    },
+    {
+      "question": "Vous avez un jeu de 52 cartes. Si vous tirez une carte au hasard, quelle est la probabilité d'obtenir un as ?",
+      "solution": "4/52"
+    },
+    {
+      "question": "Je suis formé de carbone pur, cristallisé dans une structure cubique. Les inclusions peuvent me donner différentes couleurs. Qu'est-ce que je suis ?",
+      "solution": "diamant"
+    },
+    {
+      "question": "Je suis une méthode spéciale appelée lors de la création d'un objet en programmation orientée objet. Comment m'appelle-t-on généralement ?",
+      "solution": "constructeur"
+    },
+    {
+      "question": "Je suis un type de diagramme utilisé pour illustrer la planification du projet, en montrant la chronologie des tâches. Comment m'appelle-t-on ?",
+      "solution": "Diagramme de Gantt"
+    },
+    {
+      "question": "Je suis le “S” de la méthode SMART. Comment je me définis ?",
+      "solution": "Spécifique"
+    }
+  ]
+
