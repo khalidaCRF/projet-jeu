@@ -1,17 +1,34 @@
 package jeu;
+
+import enigmes.Enigme;
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
 public class Jeu {
 
     private GUI gui;
     private Zone zoneCourante;
+    private List<Enigme> enigmes;
+    private Scanner scanner;
+    private int tentativesRestantes;
+    private Enigme enigmeCourante;
+    public Jeu() throws JSONException, IOException {
 
-    public Jeu() {
-        creerCarte();
         gui = null;
+        this.enigmes = Enigme.chargerEnigmesDepuisJSON("src/enigmes/MesEnigmesJson.json");
+        creerCarte(enigmes);
+        gui = null;
+        scanner = new Scanner(System.in); // Initialisation du scanner pour la saisie de l'utilisateur
+        tentativesRestantes = 2; // Définir le nombre de tentatives autorisées
     }
 
     public void setGUI( GUI g) { gui = g; afficherMessageDeBienvenue(); }
 
-    private void creerCarte() {
+    private void creerCarte(List<Enigme> enigmes) {
         Zone [] zones = new Zone [5];
         zones[0] = new Zone("le couloir", "Couloir.jpg" );
         zones[1] = new Zone("l'escalier", "Escalier.jpg" );
@@ -26,6 +43,14 @@ public class Jeu {
         zones[1].ajouteSortie(Sortie.SUD, zones[3]);
         zones[4].ajouteSortie(Sortie.SUD, zones[2]);
         zones[1].ajouteSortie(Sortie.SUD, zones[4]);
+
+        // Associer une énigme aléatoire à chaque zone
+        Random random = new Random();
+        for (Zone zone : zones) {
+            int randomIndex = random.nextInt(enigmes.size());
+            Enigme enigme = enigmes.get(randomIndex);
+            zone.setEnigme(enigme);
+        }
 
 
         zoneCourante = zones[4];
@@ -120,5 +145,10 @@ public class Jeu {
     private void traiterActionZone(Zone zone) {
         // Ajoutez ici la logique pour gérer les actions spécifiques à chaque zone
         // Par exemple, afficher des énigmes ou des actions particulières
+    }
+    public Enigme obtenirEnigmeAleatoire() {
+        Random random = new Random();
+        int index = random.nextInt(enigmes.size()); // Générer un index aléatoire dans la plage des énigmes disponibles
+        return enigmes.get(index); // Retourner l'énigme correspondant à l'index généré
     }
 }
