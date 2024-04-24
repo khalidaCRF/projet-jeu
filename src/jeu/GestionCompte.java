@@ -10,11 +10,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+/**
+ * Cette classe gère les opérations de création de compte, de connexion et de gestion des comptes utilisateur.
+ */
 public class GestionCompte {
     private static final String FICHIER_COMPTES = "comptes.json";
-
-    // Méthode pour créer un compte utilisateur dans le fichier JSON
+    /**
+     * Crée un nouveau compte utilisateur.
+     *
+     * @param nomUtilisateur Le nom d'utilisateur du nouveau compte.
+     * @param motDePasse     Le mot de passe du nouveau compte.
+     * @return true si le compte a été créé avec succès, sinon false.
+     * @throws JSONException En cas d'erreur de manipulation JSON.
+     */
     public boolean creerCompte(String nomUtilisateur, String motDePasse) throws JSONException {
         JSONArray comptes = chargerComptes();
         if (comptes == null) {
@@ -44,7 +52,11 @@ public class GestionCompte {
         return true;
     }
 
-    // Charger les comptes à partir du fichier JSON
+    /**
+     * Charge les comptes à partir du fichier JSON.
+     *
+     * @return Un tableau JSON contenant les comptes.
+     */
     private JSONArray chargerComptes() {
         try {
             byte[] jsonData = Files.readAllBytes(Paths.get(FICHIER_COMPTES));
@@ -55,7 +67,11 @@ public class GestionCompte {
         }
     }
 
-    // Enregistrer les comptes dans le fichier JSON
+    /**
+     * Enregistre les comptes dans le fichier JSON.
+     *
+     * @param comptes Le tableau JSON contenant les comptes à enregistrer.
+     */
     private void enregistrerComptes(JSONArray comptes) {
         try (FileWriter file = new FileWriter(FICHIER_COMPTES)) {
             file.write(comptes.toString());
@@ -64,6 +80,16 @@ public class GestionCompte {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Vérifie les informations de connexion.
+     *
+     * @param nomUtilisateur Le nom d'utilisateur à vérifier.
+     * @param motDePasse     Le mot de passe à vérifier.
+     * @return true si les informations de connexion sont valides, sinon false.
+     * @throws JSONException En cas d'erreur de manipulation JSON.
+     */
+
     public boolean verifierConnexion(String nomUtilisateur, String motDePasse) throws JSONException {
         try {
             // Lire le contenu du fichier JSON
