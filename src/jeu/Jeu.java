@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-
+/**
+ * Classe principale représentant le jeu d'aventure.
+ */
 public class Jeu {
 
     private GUI gui;
@@ -16,6 +18,12 @@ public class Jeu {
     private Scanner scanner;
     private int tentativesRestantes;
     private Enigme enigmeCourante;
+    /**
+     * Constructeur de la classe Jeu.
+     *
+     * @throws JSONException En cas d'erreur lors de la manipulation des données JSON.
+     * @throws IOException   En cas d'erreur d'entrée/sortie lors de la lecture des données.
+     */
     public Jeu() throws JSONException, IOException {
 
         gui = null;
@@ -27,7 +35,11 @@ public class Jeu {
     }
 
     public void setGUI( GUI g) { gui = g; afficherMessageDeBienvenue(); }
-
+    /**
+     * Méthode privée pour créer la carte du jeu avec les zones et les énigmes associées.
+     *
+     * @param enigmes La liste des énigmes à associer aux zones.
+     */
     private void creerCarte(List<Enigme> enigmes) {
         Zone [] zones = new Zone [5];
         zones[0] = new Zone("le couloir", "Couloir.jpg" );
@@ -69,7 +81,11 @@ public class Jeu {
         afficherLocalisation();
         gui.afficheImage(zoneCourante.nomImage());
     }
-
+    /**
+     * Méthode pour traiter la commande saisie par le joueur.
+     *
+     * @param commandeLue La commande saisie par le joueur.
+     */
     public void traiterCommande(String commandeLue) {
         gui.afficher( "> "+ commandeLue + "\n");
         switch (commandeLue.toUpperCase()) {

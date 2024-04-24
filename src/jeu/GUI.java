@@ -667,7 +667,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
-
+/**
+ * Cette classe gère l'interface utilisateur graphique (GUI) pour le jeu d'aventure.
+ */
 public class GUI implements ActionListener {
     private Jeu jeu;
     private JFrame fenetre;
