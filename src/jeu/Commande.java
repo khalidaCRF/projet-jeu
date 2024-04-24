@@ -4,6 +4,8 @@ import java.util.List;
 /**
  * Cette énumération représente les commandes disponibles dans le jeu.
  */
+
+
 public enum Commande {
 	NORD("N", "N (aller à la sortie nord)"),
 	SUD("S", "S (aller à la sortie sud)"),
@@ -69,5 +71,6 @@ public enum Commande {
 		}
 		return resultat;
 	}
+
 
 }
