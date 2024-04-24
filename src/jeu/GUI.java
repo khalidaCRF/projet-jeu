@@ -681,13 +681,22 @@ public class GUI implements ActionListener {
     private JButton ouestButton;
     private JTextField nomUtilisateurField;
     private JPasswordField motDePasseField;
-
+    /**
+     * Constructeur de la classe GUI.
+     * Initialise l'interface utilisateur graphique.
+     *
+     * @param j Instance du jeu.
+     */
     public GUI(Jeu j) {
         jeu = j;
         creerGUI();
         afficherInterfaceConnexion();
     }
-
+    /**
+     * Affiche un texte dans la zone de texte.
+     *
+     * @param s Le texte à afficher.
+     */
     public void afficher(String s) {
         texte.append(s);
         texte.setCaretPosition(texte.getDocument().getLength());
@@ -696,7 +705,11 @@ public class GUI implements ActionListener {
     public void afficher() {
         afficher("\n");
     }
-
+    /**
+     * Affiche une image spécifiée.
+     *
+     * @param nomImage Le nom de l'image à afficher.
+     */
     public void afficheImage(String nomImage) {
         URL imageURL = this.getClass().getClassLoader().getResource("jeu/images/" + nomImage);
         if (imageURL != null) {
@@ -704,7 +717,11 @@ public class GUI implements ActionListener {
             fenetre.pack();
         }
     }
-
+    /**
+     * Active ou désactive la zone de texte pour l'entrée du joueur.
+     *
+     * @param ok true pour activer, false pour désactiver.
+     */
     public void enable(boolean ok) {
         entree.setEditable(ok);
         if (!ok)
@@ -740,7 +757,11 @@ public class GUI implements ActionListener {
         fenetre.setVisible(true);
         entree.requestFocus();
     }
-
+    /**
+     * Gère les actions de l'utilisateur.
+     *
+     * @param e L'événement déclenché par l'utilisateur.
+     */
     public void actionPerformed(ActionEvent e) {
         executerCommande();
     }
@@ -764,6 +785,11 @@ public class GUI implements ActionListener {
         // Jouer le fichier audio de bienvenue
         AudioPlayer.jouerSon("ElevenLabs_2024-04-07T21_51_56_Serena.mp3");
     }
+    /**
+     * Place les composants de l'interface de connexion sur le panneau spécifié.
+     *
+     * @param panel Le panneau sur lequel placer les composants de l'interface de connexion.
+     */
 
     private void placeComponents(JPanel panel) {
         panel.setLayout(null);
@@ -822,7 +848,15 @@ public class GUI implements ActionListener {
             }
         });
     }
-
+    /**
+     * Affiche l'interface principale du jeu d'aventure.
+     *
+     * @implNote Cette méthode crée et affiche l'interface graphique du jeu d'aventure,
+     *           composée de boutons de direction (nord, sud, est, ouest) et d'une grille 300x200.
+     *           Elle initialise également les écouteurs d'événements pour chaque bouton afin de
+     *           permettre au joueur de se déplacer dans le jeu. De plus, elle associe chaque
+     *           bouton à une action d'affichage de fenêtre contextuelle pour une énigme.
+     */
     private void afficherInterface() {
         JFrame frame = new JFrame("Jeu d'aventure");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -901,6 +935,15 @@ public class GUI implements ActionListener {
             }
         });
     }
+    /**
+     * Affiche une fenêtre contextuelle pour une énigme.
+     *
+     * @implNote La méthode obtient une énigme aléatoire du jeu et affiche une fenêtre contextuelle
+     *           avec la question de l'énigme. Si l'utilisateur entre une réponse, cette méthode vérifie
+     *           si la réponse est correcte. Si la réponse est correcte, un message de félicitations est affiché
+     *           et l'image est mise à jour. Si la réponse est incorrecte, un message d'erreur est affiché et
+     *           une deuxième tentative est offerte. Si la deuxième tentative échoue, un message "Game Over" est affiché.
+     */
 
     private void afficherPopupEnigme() {
         Enigme enigme = jeu.obtenirEnigmeAleatoire(); // Méthode à implémenter dans la classe Jeu
@@ -942,8 +985,14 @@ public class GUI implements ActionListener {
         }
     }
 
-    // Méthode pour mettre à jour l'affichage des flèches en fonction des directions possibles
-    public void mettreAJourFleches(boolean nord, boolean sud, boolean est, boolean ouest) {
+    /**
+     * Met à jour l'affichage des flèches en fonction des directions possibles.
+     *
+     * @param nord  true si la direction nord est possible, sinon false.
+     * @param sud   true si la direction sud est possible, sinon false.
+     * @param est   true si la direction est possible, sinon false.
+     * @param ouest true si la direction ouest est possible, sinon false.
+     */    public void mettreAJourFleches(boolean nord, boolean sud, boolean est, boolean ouest) {
         nordButton.setText(nord ? "\u2191" : ""); // Flèche vers le nord si possible, sinon vide
         sudButton.setText(sud ? "\u2193" : ""); // Flèche vers le sud si possible, sinon vide
         estButton.setText(est ? "\u2192" : ""); // Flèche vers l'est si possible, sinon vide
