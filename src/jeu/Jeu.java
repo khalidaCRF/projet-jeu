@@ -122,20 +122,6 @@ public class Jeu {
         gui.afficher();
     }
 
-    /*private void allerEn(String direction) {
-    	Zone nouvelle = zoneCourante.obtientSortie( direction);
-    	if ( nouvelle == null ) {
-        	gui.afficher( "Pas de sortie " + direction);
-    		gui.afficher();
-    	}
-        else {
-        	zoneCourante = nouvelle;
-        	gui.afficher(zoneCourante.descriptionLongue());
-        	gui.afficher();
-        	gui.afficheImage(zoneCourante.nomImage());
-        }
-    }*/
-
     private void terminer() {
         gui.afficher( "Au revoir...");
         gui.enable( false);
