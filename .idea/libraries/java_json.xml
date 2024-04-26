@@ -2,10 +2,12 @@
   <library name="java-json">
     <CLASSES>
       <root url="file://$USER_HOME$/Downloads/java-json.jar" />
+      <root url="jar://$PROJECT_DIR$/../../../java-json.jar (1)/java-json.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="file://$USER_HOME$/Downloads/java-json.jar" />
+      <root url="jar://$PROJECT_DIR$/../../../java-json.jar (1)/java-json.jar!/" />
     </SOURCES>
     <jarDirectory url="file://$USER_HOME$/Downloads/java-json.jar" recursive="false" />
     <jarDirectory url="file://$USER_HOME$/Downloads/java-json.jar" recursive="false" type="SOURCES" />
