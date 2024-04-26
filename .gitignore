@@ -1,2 +1,13 @@
 # Project exclude paths
 /out/
+# Ignorer les fichiers générés automatiquement
+build/
+dist/
+*.log
+
+# Ignorer les fichiers sensibles
+config.js
+credentials.json
+
+# Ignorer les fichiers d'environnement locaux
+.env
