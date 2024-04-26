@@ -2,10 +2,15 @@ package jeu;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.*;
+
 import java.io.File;
 
 public class AudioPlayer {
+    //TODO
+    //FIXME JAVADOC :
+    // - JavaDoc for JouerSon
+    //
+
     public static void jouerSon(String cheminFichier) {
         try {
             File fichierAudio = new File(cheminFichier);

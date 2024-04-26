@@ -2,7 +2,9 @@ package jeu;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+//TODO
+//FIXME :
+// -A voir si ilm faut laisser ou pas la classe
 public class ConnexionDB {
     public static Connection getConnection() throws SQLException {
         String url = "jdbc:postgresql://localhost:5432/JEU";
