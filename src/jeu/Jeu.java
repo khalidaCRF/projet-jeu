@@ -42,11 +42,11 @@ public class Jeu {
      */
     private void creerCarte(List<Enigme> enigmes) {
         Zone [] zones = new Zone [5];
-        zones[0] = new Zone("le couloir", "Couloir.jpg" );
-        zones[1] = new Zone("l'escalier", "Escalier.jpg" );
-        zones[2] = new Zone("la grande salle", "GrandeSalle.jpg" );
-        zones[3] = new Zone("la salle à manger", "SalleAManger.jpg" );
-        zones[4] = new Zone("musee", "musee.jpg" );
+        zones[0] = new Zone("la première salle", "room1.jpg" );
+        zones[1] = new Zone("la troisième salle", "room3.jpg" );
+        zones[2] = new Zone("la deuxième  salle", "room2.jpg" );
+        zones[3] = new Zone("la quatrième salle", "room4.jpg" );
+        zones[4] = new Zone("le couloir", "couloir1b.jpg" );
         zones[0].ajouteSortie(Sortie.EST, zones[1]);
         zones[1].ajouteSortie(Sortie.OUEST, zones[0]);
         zones[1].ajouteSortie(Sortie.EST, zones[2]);
@@ -73,7 +73,7 @@ public class Jeu {
         gui.afficher();
     }
 
-    private void afficherMessageDeBienvenue() {
+    public void afficherMessageDeBienvenue() {
         gui.afficher("Bienvenue !");
         gui.afficher();
         gui.afficher("Tapez '?' pour obtenir de l'aide.");
